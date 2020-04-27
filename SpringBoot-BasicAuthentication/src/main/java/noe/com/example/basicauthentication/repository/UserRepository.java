@@ -5,7 +5,8 @@
  */
 package noe.com.example.basicauthentication.repository;
 
-import noe.com.example.basicauthentication.entity.User;
+import java.util.Optional;
+import noe.com.example.basicauthentication.model.entity.UserEntity;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -15,7 +16,9 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class UserRepository {
     
-    public User findUserByUsername(String username){
-        return new User("admin","admin","ADMIN");
+    public Optional<UserEntity> findUserByUsername(String username){
+//        return Optional.of(new UserEntity("admin","admin","ADMIN"));
+            return Optional.empty();
+//            return null;
     }
 }

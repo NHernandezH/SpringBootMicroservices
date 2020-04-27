@@ -7,6 +7,7 @@ package noe.com.example.basicauthentication.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import noe.com.example.basicauthentication.model.entity.UserEntity;
 import noe.com.example.basicauthentication.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -23,18 +24,19 @@ import org.springframework.stereotype.Service;
  * @author noe_5
  */
 @Service
-public class UserDetailsServiceImpl implements UserDetailsService{
-    
+public class UserDetailsServiceImpl implements UserDetailsService {
+
     @Autowired
     private UserRepository userRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        noe.com.example.basicauthentication.entity.User user = userRepository.findUserByUsername(username);
+//        throw new UsernameNotFoundException("User not exist");
+        UserEntity user = userRepository.findUserByUsername(username).orElseThrow(() -> new UsernameNotFoundException("User not found"));
         return userBuilder(user);
     }
-    
-    private User userBuilder(noe.com.example.basicauthentication.entity.User user){
+
+    private User userBuilder(UserEntity user) {
         List<GrantedAuthority> roles = new ArrayList<>();
         roles.add(new SimpleGrantedAuthority(user.getRole()));
         return new User(user.getUsername(), new BCryptPasswordEncoder().encode(user.getPassword()), roles);

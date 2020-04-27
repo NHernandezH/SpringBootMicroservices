@@ -3,19 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package noe.com.example.basicauthentication.entity;
+package noe.com.example.basicauthentication.model.entity;
 
 /**
  *
  * @author noe_5
  */
-public class User {
+public class UserEntity {
     
     private String username;
     private String Password;
     private String role;
 
-    public User(String username, String Password, String role) {
+    public UserEntity(String username, String Password, String role) {
         this.username = username;
         this.Password = Password;
         this.role = role;
